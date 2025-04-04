@@ -59,3 +59,29 @@ class OnlineSalesRegisterCollector:
             total = total_temp
 
         return sum(map(lambda x: x * 0.2, total))
+
+    def ten_percent_tax_calculation(self):
+        ten_percent_tax = []
+        total = []
+
+        for item in self.__name_items:
+            if self.__tax_rate[item] == '10':
+                ten_percent_tax.append(item)
+                total.append(self.__item_price[item])
+
+        if len(self.__name_items) > 10:
+            total_temp = []
+            for price in total:
+                total_temp.append(price * 0.9)
+            total = total_temp
+
+        return sum(map(lambda x: x * 0.1, total))
+
+    def total_tax(self):
+        sum_10 = OnlineSalesRegisterCollector.ten_percent_tax_calculation(self)
+        sum_12 = OnlineSalesRegisterCollector.twenty_percent_tax_calculation(self)
+
+        return sum_10 + sum_12
+
+    def get_telephone_number(self, telephone_number):
+        pass
