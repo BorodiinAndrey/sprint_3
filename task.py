@@ -91,3 +91,23 @@ class OnlineSalesRegisterCollector:
             raise ValueError('Необходимо ввести 10 цифр после "+7"')
         else:
             return f'+7{telephone_number}'
+
+    @staticmethod
+    def get_date_and_time():
+        date_and_time = []
+        now = datetime.datetime.now()
+        date = [
+            ['часы', lambda x: x.hour],
+            ['минуты', lambda x: x.minute],
+            ['день', lambda x: x.day],
+            ['месяц', lambda x: x.month],
+            ['год', lambda x: x.year]
+        ]
+
+        for i in date:
+            name = i[0]
+            function = i[1]
+            result = function(now)
+            date_and_time.append(f'{name}: {result}')
+
+        return date_and_time
