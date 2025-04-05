@@ -17,7 +17,7 @@ class OnlineSalesRegisterCollector:
         return self.__number_items
 
     def add_item_to_cheque(self, name):
-        if 0 > len(name) > 40:
+        if len(name) == 0 or len(name) > 40:
             raise ValueError('Нельзя добавить товар, если в его названии нет символов или их больше 40')
         elif name not in self.__item_price:
             raise NameError('Позиция отсутствует в товарном справочнике')
@@ -83,5 +83,11 @@ class OnlineSalesRegisterCollector:
 
         return sum_10 + sum_12
 
-    def get_telephone_number(self, telephone_number):
-        pass
+    @staticmethod
+    def get_telephone_number(telephone_number):
+        if type(telephone_number) != int:
+            raise ValueError('Необходимо ввести цифры')
+        elif len(str(telephone_number)) > 10:
+            raise ValueError('Необходимо ввести 10 цифр после "+7"')
+        else:
+            return f'+7{telephone_number}'
